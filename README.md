@@ -14,7 +14,7 @@ To execute this project we have used Remix IDE (https://remix.ethereum.org/)
 1. Start by creating a smart contract named myContract
 2. Then create three functions which will demonstrate the use of the three statements
 3. code:
-```
+``` javascript
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
