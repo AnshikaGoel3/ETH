@@ -5,7 +5,7 @@ contract myContract {
     //function demonstrating the use of require() statement
     function requireFunc(uint a) public pure {
         //it will check if a > 100 or not , if it is not then it will revert with a message
-        require(a > 100, "value of a should be grater than 100");
+        require(a > 100, "value of a should be greater than 100");
     }
 
     //function demonstarting the use of revert() statement 
