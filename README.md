@@ -29,7 +29,7 @@ contract UniversityAdmission {
 
     function setScore(address student, uint score) public {
         // used require() statement to ensure that score is between 0 and 100(inclusive) otherwise it will be invalid
-        require(score >= 0 && score <= 100, "Ivalid score, score must be between 0 and 100(inclusive)");
+        require(score >= 0 && score <= 100, "Invalid score, score must be between 0 and 100(inclusive)");
         studentScores[student] = score;
     }
 
