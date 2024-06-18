@@ -1,42 +1,54 @@
 # Smart Contract Project
 
-This project includes a smart contract that includes functions, demonstrating the use of rquire, revert and assert statements.
+This project includes a smart contract that includes functions, demonstrating the use of require, revert and assert statements.
 
 ## Description
 
-In this project, we have a written a smart contract that implements the require(), revert() and assert() statements.
+In this project, we have  written a smart contract 'UniversityAdmission' for managing university admission based on scores. It implements require(), revert() and assert() statements.
 These statements are used for error handling in solidity.
 
 ## Getting Started
 ### Executing Program
 To execute this project we have used Remix IDE (https://remix.ethereum.org/)
 
-1. Start by creating a smart contract named myContract
-2. Then create three functions which will demonstrate the use of the three statements
-3. code:
+1. Start by creating a smart contract named universityAdmission
+2. Then create three functions which will demonstrate the use of the three error handling statements
+3. Create a Function setScore which will set the score for a particular student address. It is using a require() statement to ensure that score is valid.
+4. Then, create a function isEligible which is using assert() statement to set up the atleast requirement for eligibility that is score>=75.
+5. Then, create a function checkEligibility which is using revert() statement which is used to display the eligibilty status according to the score of the student.
+6. Code:
 ``` javascript
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.18;
+pragma solidity ^0.8.0;
 
-contract myContract {
-    //function demonstrating the use of require() statement
-    function requireFunc(uint a) public pure {
-        //it will check if a > 100 or not , if it is not then it will revert with a message
-        require(a > 100, "value of a should be greater than 100");
+//created a  contract named UniversityAdmission
+contract UniversityAdmission {
+
+    //state variable studentScores that stores the score for a praticular student address
+    mapping(address => uint) public studentScores;
+
+    function setScore(address student, uint score) public {
+        // used require() statement to ensure that score is between 0 and 100(inclusive) otherwise it will be invalid
+        require(score >= 0 && score <= 100, "Ivalide score, score must be between 0 and 100(inclusive)");
+        studentScores[student] = score;
     }
 
-    //function demonstarting the use of revert() statement 
-    function revertFunc(int a) public pure {
-        //it will revert with a message if value of 'a' is between 0 and 10 (inclusive)
-        if(a >= 0 && a <= 10) {
-            revert("value of a should not lie between 0 and 10");
+    function isEligible(address student) public view returns(bool) {
+        uint score = studentScores[student];
+        //assert() statement to ensure the score is atleast 75 for eligibility
+        assert(score >= 75);
+        return true;
+    }
+
+    function checkEligibility(address student)  public view{
+        uint score = studentScores[student];
+        //used revert() statement to display the eligibility message according to the score of the student
+        if(score < 75) {
+            revert("Studet is not eligible for university admission");
         }
-    }
-
-    //function demonstarting the use of assert() statement
-    function assertFunc(int a) public pure {
-        //it is used to make sure that value of 'a' must be greater than 0 otherwise it will return a bug
-        assert(a > 0);
+        else {
+            revert("Student is eligible for university admission");
+        }
     }
 }
 ```
